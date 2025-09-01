@@ -1,14 +1,15 @@
 CREATE TYPE gender AS ENUM(
-    'F',
-    'M',
-    'U'
+    'female',
+    'male',
+    'unisex'
 );
 
 CREATE TYPE season AS ENUM (
     'winter',
     'spring',
     'summer',
-    'autumn'
+    'autumn',
+    'all_season'
 );
 
 
