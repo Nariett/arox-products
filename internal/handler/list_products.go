@@ -4,13 +4,34 @@ import (
 	"context"
 	proto "github.com/Nariett/arox-pkg/grpc/pb/products"
 	"google.golang.org/protobuf/types/known/emptypb"
+	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
-func (h *handler) ListProducts(context.Context, *emptypb.Empty) (*proto.Product, error) {
-	return &proto.Product{
-		Brand:       "Nike",
-		Name:        "Air Force",
-		Price:       123,
-		Description: "Default white shoes",
+func (h *handler) ListProducts(context.Context, *emptypb.Empty) (*proto.Products, error) {
+	response, err := h.store.Products().List()
+	if err != nil {
+		return nil, err
+	}
+
+	var products []*proto.Product
+
+	for _, r := range response {
+		product := &proto.Product{
+			Id:          r.ID,
+			Brand:       r.Brand,
+			Name:        r.Name,
+			Price:       r.Price,
+			Category:    r.Category,
+			Description: r.Description.String,
+			Sizes:       string(r.Sizes),
+			IsActive:    r.IsActive,
+			CreatedAt:   timestamppb.New(r.CreatedAt),
+		}
+
+		products = append(products, product)
+	}
+
+	return &proto.Products{
+		Products: products,
 	}, nil
 }

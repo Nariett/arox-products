@@ -4,8 +4,9 @@ github.com/Azure/go-ansiterm v0.0.0-20230124172434-306776ec8161 h1:L/gRVlceqvL25
 github.com/Azure/go-ansiterm v0.0.0-20230124172434-306776ec8161/go.mod h1:xomTg63KZ2rFqZQzSB4Vz2SUXa1BpHTVz9L5PTmPC4E=
 github.com/Microsoft/go-winio v0.6.2 h1:F2VQgta7ecxGYO8k3ZZz3RS8fVIXVxONVUPlNERoyfY=
 github.com/Microsoft/go-winio v0.6.2/go.mod h1:yd8OoFMLzJbo9gZq8j5qaps8bJ9aShtEA8Ipt1oGCvU=
-github.com/Nariett/arox-pkg v0.0.0-20250901211022-0f9aa4c95a49 h1:RNdqzUgPtq50N9GzzSgbxM6aNjk+YPKiB1+opCeSEno=
 github.com/Nariett/arox-pkg v0.0.0-20250901211022-0f9aa4c95a49/go.mod h1:agUnsGjGNHxa7ML1pI989ib/1xr/ayiictFglMQJEKk=
+github.com/Nariett/arox-pkg v0.0.0-20250906130426-1dbfd4148210 h1:rsagV0HqxAnh156lUoi2CaP4WudGr2MRf/YrjJLDzSg=
+github.com/Nariett/arox-pkg v0.0.0-20250906130426-1dbfd4148210/go.mod h1:2ykvblud9nPYDs+dYSMQwAPLg1YdqVmoGT//PDfEEa8=
 github.com/containerd/errdefs v1.0.0 h1:tg5yIfIlQIrxYtu9ajqY42W3lpS19XqdxRQeEwYG8PI=
 github.com/containerd/errdefs v1.0.0/go.mod h1:+YBYIdtsnF4Iw6nWZhJcqGSg/dwvV7tyJ/kCkyJ2k+M=
 github.com/containerd/errdefs/pkg v0.3.0 h1:9IKJ06FvyNlexW690DXuQNx2KA2cUJXx151Xdx3ZPPE=

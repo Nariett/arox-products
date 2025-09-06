@@ -2,8 +2,10 @@ package main
 
 import (
 	"arox-products/internal/handler"
+	"arox-products/internal/stores"
 	"context"
 	"github.com/Nariett/arox-pkg/config"
+	"github.com/Nariett/arox-pkg/db"
 	proto "github.com/Nariett/arox-pkg/grpc/pb/products"
 	"go.uber.org/fx"
 	"google.golang.org/grpc"
@@ -25,17 +27,17 @@ func StartServer(lc fx.Lifecycle, h handler.Handler, cfg *config.Config) {
 
 	lc.Append(fx.Hook{
 		OnStart: func(ctx context.Context) error {
-			log.Println("gRPC-сервер запущен")
+			log.Println("gRPC-server start")
 			go func() {
 				if err := server.Serve(listener); err != nil {
-					log.Fatalf("Ошибка запуска gRPC-сервера: %v", err)
+					log.Fatalf("error gRPC-server: %v", err)
 				}
 			}()
 			return nil
 		},
 		OnStop: func(ctx context.Context) error {
 			server.GracefulStop()
-			log.Println("gRPC-сервер остановлен")
+			log.Println("gRPC-server stop")
 			return nil
 		},
 	})
@@ -45,12 +47,13 @@ func main() {
 	application := fx.New(
 		fx.Provide(
 			config.New,
-			//db.NewPostgres,
-			//store.Construct,
+			db.NewPostgres,
+			stores.Construct,
 			handler.NewHandler,
 		),
+		stores.Construct(),
 		fx.Invoke(
-			//schema.Migrate,
+			db.Migrate,
 			StartServer),
 	)
 	application.Run()
