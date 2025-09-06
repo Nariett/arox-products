@@ -2,12 +2,20 @@ package handler
 
 import (
 	"context"
+	"encoding/json"
 	proto "github.com/Nariett/arox-pkg/grpc/pb/products"
 	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
 func (h *handler) GetProduct(ctx context.Context, req *proto.GetProductRequest) (*proto.GetProductResponse, error) {
 	product, err := h.store.Products().GetProductWithId(ctx, req.Id)
+	if err != nil {
+		return nil, err
+	}
+
+	var sizes *proto.Sizes
+
+	err = json.Unmarshal(product.Sizes, &sizes)
 	if err != nil {
 		return nil, err
 	}
@@ -19,7 +27,7 @@ func (h *handler) GetProduct(ctx context.Context, req *proto.GetProductRequest) 
 		Price:       product.Price,
 		CategoryId:  product.CategoryId,
 		Description: product.Description.String,
-		Sizes:       string(product.Sizes),
+		Sizes:       sizes,
 		IsActive:    product.IsActive,
 		CreatedAt:   timestamppb.New(product.CreatedAt),
 	}

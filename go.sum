@@ -9,6 +9,8 @@ github.com/Nariett/arox-pkg v0.0.0-20250906130426-1dbfd4148210 h1:rsagV0HqxAnh15
 github.com/Nariett/arox-pkg v0.0.0-20250906130426-1dbfd4148210/go.mod h1:2ykvblud9nPYDs+dYSMQwAPLg1YdqVmoGT//PDfEEa8=
 github.com/Nariett/arox-pkg v0.0.0-20250906155340-98a10909ad30 h1:zEZGqW4jdEO4o/7ZTuOuQCFMknrlETSW7tR9jpdRzTk=
 github.com/Nariett/arox-pkg v0.0.0-20250906155340-98a10909ad30/go.mod h1:2ykvblud9nPYDs+dYSMQwAPLg1YdqVmoGT//PDfEEa8=
+github.com/Nariett/arox-pkg v0.0.0-20250906214527-2f53ccdd76f4 h1:fNgrl7ZYkXI3UsCRlRljLHU0n2rrvzymrxnoTehXaAQ=
+github.com/Nariett/arox-pkg v0.0.0-20250906214527-2f53ccdd76f4/go.mod h1:2ykvblud9nPYDs+dYSMQwAPLg1YdqVmoGT//PDfEEa8=
 github.com/containerd/errdefs v1.0.0 h1:tg5yIfIlQIrxYtu9ajqY42W3lpS19XqdxRQeEwYG8PI=
 github.com/containerd/errdefs v1.0.0/go.mod h1:+YBYIdtsnF4Iw6nWZhJcqGSg/dwvV7tyJ/kCkyJ2k+M=
 github.com/containerd/errdefs/pkg v0.3.0 h1:9IKJ06FvyNlexW690DXuQNx2KA2cUJXx151Xdx3ZPPE=

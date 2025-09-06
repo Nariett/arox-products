@@ -16,3 +16,12 @@ type Product struct {
 	IsActive    bool           `db:"is_active"`
 	CreatedAt   time.Time      `db:"created_at"`
 }
+
+type Size struct {
+	Size  string `json:"size"`
+	Count int64  `json:"count"`
+}
+
+type Sizes struct {
+	Sizes []Size `json:"sizes"`
+}

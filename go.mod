@@ -3,7 +3,7 @@ module arox-products
 go 1.24.0
 
 require (
-	github.com/Nariett/arox-pkg v0.0.0-20250906155340-98a10909ad30
+	github.com/Nariett/arox-pkg v0.0.0-20250906214527-2f53ccdd76f4
 	github.com/jmoiron/sqlx v1.4.0
 	go.uber.org/fx v1.24.0
 	google.golang.org/grpc v1.75.0
