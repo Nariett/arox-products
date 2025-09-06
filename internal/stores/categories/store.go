@@ -2,11 +2,12 @@ package categories
 
 import (
 	"arox-products/internal/models"
+	"context"
 	"github.com/jmoiron/sqlx"
 )
 
 type Store interface {
-	List() ([]models.Category, error)
+	ListCategories(ctx context.Context) ([]models.Category, error)
 }
 
 type store struct {

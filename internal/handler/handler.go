@@ -10,7 +10,10 @@ import (
 type Handler interface {
 	proto.ProductsServiceServer
 
-	ListProducts(ctx context.Context, empty *emptypb.Empty) (*proto.Products, error)
+	GetProduct(ctx context.Context, req *proto.GetProductRequest) (*proto.GetProductResponse, error)
+	ListProducts(ctx context.Context, _ *emptypb.Empty) (*proto.ListProductsResponse, error)
+
+	ListCategories(ctx context.Context, _ *emptypb.Empty) (*proto.ListCategoriesResponse, error)
 }
 
 type handler struct {

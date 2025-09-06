@@ -9,7 +9,7 @@ type Product struct {
 	ID          int64          `db:"id"`
 	Brand       string         `db:"brand"`
 	Name        string         `db:"name"`
-	Category    int64          `db:"category"`
+	CategoryId  int64          `db:"category"`
 	Price       int64          `db:"price"`
 	Description sql.NullString `db:"description"`
 	Sizes       []byte         `db:"sizes"`

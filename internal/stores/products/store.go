@@ -2,11 +2,13 @@ package products
 
 import (
 	"arox-products/internal/models"
+	"context"
 	"github.com/jmoiron/sqlx"
 )
 
 type Store interface {
-	List() ([]models.Product, error)
+	ListProducts(ctx context.Context) ([]*models.Product, error)
+	GetProductWithId(ctx context.Context, id int64) (*models.Product, error)
 }
 
 type store struct {

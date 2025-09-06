@@ -7,8 +7,8 @@ import (
 	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
-func (h *handler) ListProducts(context.Context, *emptypb.Empty) (*proto.Products, error) {
-	response, err := h.store.Products().List()
+func (h *handler) ListProducts(ctx context.Context, _ *emptypb.Empty) (*proto.ListProductsResponse, error) {
+	response, err := h.store.Products().ListProducts(ctx)
 	if err != nil {
 		return nil, err
 	}
@@ -21,7 +21,7 @@ func (h *handler) ListProducts(context.Context, *emptypb.Empty) (*proto.Products
 			Brand:       r.Brand,
 			Name:        r.Name,
 			Price:       r.Price,
-			Category:    r.Category,
+			CategoryId:  r.CategoryId,
 			Description: r.Description.String,
 			Sizes:       string(r.Sizes),
 			IsActive:    r.IsActive,
@@ -31,7 +31,7 @@ func (h *handler) ListProducts(context.Context, *emptypb.Empty) (*proto.Products
 		products = append(products, product)
 	}
 
-	return &proto.Products{
+	return &proto.ListProductsResponse{
 		Products: products,
 	}, nil
 }
