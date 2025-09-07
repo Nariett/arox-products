@@ -4,7 +4,7 @@ CREATE TABLE categories (
     slug TEXT NOT NULL
 );
 
-CREATE TABLE product(
+CREATE TABLE products(
     id SERIAL PRIMARY KEY,
     brand TEXT NOT NULL,
     name TEXT NOT NULL,
@@ -18,14 +18,8 @@ CREATE TABLE product(
 
 CREATE TABLE images(
     id SERIAL PRIMARY KEY,
-    id_product INT REFERENCES product (id),
+    id_product INT REFERENCES products (id),
     url TEXT NOT NULL,
     is_main BOOL,
     is_active BOOL
 );
-
-INSERT INTO categories (name, slug)
-VALUES
-    ('Одежда', 'clothes'),
-    ('Обувь', 'shoes'),
-    ('Аксессуары', 'accessories');
