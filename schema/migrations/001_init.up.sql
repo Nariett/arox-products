@@ -1,14 +1,14 @@
 CREATE TABLE categories (
     id SERIAL PRIMARY KEY,
-    name TEXT NOT NULL,
-    slug TEXT NOT NULL
+    name TEXT NOT NULL UNIQUE,
+    slug TEXT NOT NULL UNIQUE
 );
 
 CREATE TABLE products(
     id SERIAL PRIMARY KEY,
     brand TEXT NOT NULL,
     name TEXT NOT NULL,
-    category INT REFERENCES categories (id),
+    category_id INT REFERENCES categories (id),
     price BIGINT NOT NULL,
     description TEXT,
     sizes JSONB NOT NULL,

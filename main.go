@@ -48,7 +48,6 @@ func main() {
 		fx.Provide(
 			config.New,
 			db.NewPostgres,
-			stores.Construct,
 			handler.NewHandler,
 		),
 		stores.Construct(),

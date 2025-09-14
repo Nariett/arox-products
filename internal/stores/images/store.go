@@ -1,4 +1,4 @@
-package categories
+package images
 
 import (
 	"arox-products/internal/models"
@@ -7,8 +7,7 @@ import (
 )
 
 type Store interface {
-	ListCategories(ctx context.Context) ([]*models.Category, error)
-	GetCategoryWithId(ctx context.Context, idCategory int64) (*models.Category, error)
+	GetImagesWithId(ctx context.Context, idProduct int64) ([]*models.Image, error)
 }
 
 type store struct {

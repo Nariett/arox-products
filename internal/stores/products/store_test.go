@@ -5,58 +5,26 @@ import (
 	"arox-products/tests"
 	"context"
 	"database/sql"
-	"github.com/jmoiron/sqlx"
 	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
+	"sort"
 	"testing"
 	"time"
 )
-
-func InsertCategory(db *sqlx.DB, category models.Category) error {
-	ctx := context.Background()
-
-	query := `INSERT INTO categories (name, slug) VALUES ($1, $2)`
-
-	_, err := db.ExecContext(ctx, query, category.Name, category.Slug)
-	if err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func InsertProduct(db *sqlx.DB, product models.Product) (*models.Product, error) {
-	ctx := context.Background()
-
-	query := `INSERT INTO products (brand, name, category, price, description, sizes, is_active, created_at) 
-              VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
-              RETURNING id, brand, name, category, price, description, sizes, is_active, created_at`
-
-	var insertedProduct models.Product
-	err := db.QueryRowxContext(ctx, query,
-		product.Brand,
-		product.Name,
-		product.CategoryId,
-		product.Price,
-		product.Description,
-		product.Sizes,
-		product.IsActive,
-		product.CreatedAt,
-	).StructScan(&insertedProduct)
-
-	if err != nil {
-		return nil, err
-	}
-
-	return &insertedProduct, nil
-}
 
 func TestListProducts(t *testing.T) {
 	db := tests.CreateTestContainerWithMigrations(t)
 	store := NewStore(db)
 
-	category := models.Category{
-		Name: "Футболки",
-		Slug: "t-shirts",
+	categories := []models.Category{
+		{
+			Name: "Кроссовки",
+			Slug: "sneakers",
+		},
+		{
+			Name: "Футболки",
+			Slug: "t-shirts",
+		},
 	}
 
 	sizesStr := `
@@ -78,33 +46,56 @@ func TestListProducts(t *testing.T) {
 	}
 	`
 
-	product := models.Product{
-		Brand:       "Nike",
-		Name:        "Air Max",
-		CategoryId:  1,
-		Price:       12000,
-		Description: sql.NullString{String: "XD", Valid: true},
-		Sizes:       []byte(sizesStr),
-		IsActive:    true,
-		CreatedAt:   time.Now(),
+	products := []models.Product{
+		{
+			Brand:       "Nike",
+			Name:        "base",
+			CategoryId:  2,
+			Price:       12000,
+			Description: sql.NullString{String: "good t-shirt", Valid: true},
+			Sizes:       []byte(sizesStr),
+			IsActive:    true,
+			CreatedAt:   time.Now().In(time.UTC),
+		},
+		{
+			Brand:       "Adidas",
+			Name:        "Superstar",
+			CategoryId:  1,
+			Price:       12000,
+			Description: sql.NullString{String: "good sneakers", Valid: true},
+			Sizes:       []byte(sizesStr),
+			IsActive:    true,
+			CreatedAt:   time.Now().In(time.UTC),
+		},
 	}
 
-	err := InsertCategory(db, category)
-	if err != nil {
-		t.Fatal(err)
+	for _, category := range categories {
+		createdCategory, err := tests.InsertCategory(db, category)
+		require.NoError(t, err)
+		assert.True(t, createdCategory.Id > 0)
 	}
 
-	value, err := InsertProduct(db, product)
-	if err != nil {
-		t.Fatal(err)
+	for _, product := range products {
+		createdProduct, err := tests.InsertProduct(db, product)
+		require.NoError(t, err)
+		assert.True(t, createdProduct.Id > 0)
 	}
-
-	assert.True(t, value.ID > 0)
 
 	response, err := store.ListProducts(context.Background())
-	if err != nil {
-		t.Fatal(err)
-	}
+	require.NoError(t, err)
 
-	assert.Equal(t, 1, len(response))
+	sort.Slice(response, func(i, j int) bool {
+		return response[i].Id < response[j].Id
+	})
+
+	for i, v := range response {
+		assert.Equal(t, products[i].Brand, v.Brand)
+		assert.Equal(t, products[i].Name, v.Name)
+		assert.Equal(t, products[i].CategoryId, v.CategoryId)
+		assert.Equal(t, products[i].Price, v.Price)
+		assert.Equal(t, products[i].Description.String, v.Description.String)
+		assert.JSONEq(t, string(products[i].Sizes), string(v.Sizes))
+		assert.Equal(t, products[i].IsActive, v.IsActive)
+		assert.WithinDuration(t, products[i].CreatedAt, v.CreatedAt, time.Millisecond)
+	}
 }

@@ -5,8 +5,9 @@ import (
 	"context"
 )
 
-func (s *store) GetProductWithId(ctx context.Context, id int64) (*models.Product, error) {
-	var product models.Product
+func (s *store) GetProductWithId(ctx context.Context, id int64) (*models.ProductWithImage, error) {
+	var product models.ProductWithImage
+
 	query := `SELECT * FROM products WHERE id = $1`
 
 	err := s.db.GetContext(ctx, &product, query, id)

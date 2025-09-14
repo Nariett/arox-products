@@ -4,29 +4,13 @@ import (
 	"arox-products/internal/models"
 	"arox-products/tests"
 	"context"
-	"github.com/jmoiron/sqlx"
+	"github.com/stretchr/testify/require"
 	"gotest.tools/v3/assert"
 	"testing"
 )
 
-func InsertCategory(db *sqlx.DB, category models.Category) error {
-	ctx := context.Background()
-
-	query := `INSERT INTO categories (name, slug) VALUES ($1, $2)`
-
-	_, err := db.ExecContext(ctx, query, category.Name, category.Slug)
-	if err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func TestListCategories(t *testing.T) {
-	db := tests.CreateTestContainerWithMigrations(t)
-	store := NewStore(db)
-
-	categories := []models.Category{
+var (
+	categories = []models.Category{
 		{
 			Name: "Футболки",
 			Slug: "t-shirts",
@@ -68,9 +52,14 @@ func TestListCategories(t *testing.T) {
 			Slug: "headwear",
 		},
 	}
+)
+
+func TestListCategories(t *testing.T) {
+	db := tests.CreateTestContainerWithMigrations(t)
+	store := NewStore(db)
 
 	for _, category := range categories {
-		err := InsertCategory(db, category)
+		_, err := tests.InsertCategory(db, category)
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -83,4 +72,24 @@ func TestListCategories(t *testing.T) {
 
 	assert.Equal(t, len(categories), len(value))
 
+}
+
+func TestGetCategoryWithId(t *testing.T) {
+	db := tests.CreateTestContainerWithMigrations(t)
+	store := NewStore(db)
+
+	for _, category := range categories {
+		_, err := tests.InsertCategory(db, category)
+		if err != nil {
+			t.Fatal(err)
+		}
+	}
+
+	value, err := store.GetCategoryWithId(context.Background(), int64(5))
+	require.NoError(t, err)
+
+	category := categories[4]
+
+	assert.Equal(t, category.Name, value.Name)
+	assert.Equal(t, category.Slug, value.Slug)
 }

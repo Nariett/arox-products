@@ -7,8 +7,8 @@ import (
 )
 
 type Store interface {
-	ListProducts(ctx context.Context) ([]*models.Product, error)
-	GetProductWithId(ctx context.Context, id int64) (*models.Product, error)
+	ListProducts(ctx context.Context) ([]*models.ProductWithImage, error)
+	GetProductWithId(ctx context.Context, id int64) (*models.ProductWithImage, error)
 }
 
 type store struct {

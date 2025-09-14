@@ -3,7 +3,7 @@ module arox-products
 go 1.24.0
 
 require (
-	github.com/Nariett/arox-pkg v0.0.0-20250907215729-20d927eb8712
+	github.com/Nariett/arox-pkg v0.0.0-20250914230609-ab1896cfd030
 	github.com/jmoiron/sqlx v1.4.0
 	github.com/stretchr/testify v1.10.0
 	github.com/testcontainers/testcontainers-go v0.38.0

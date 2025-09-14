@@ -13,6 +13,7 @@ type Handler interface {
 	GetProduct(ctx context.Context, req *proto.GetProductRequest) (*proto.GetProductResponse, error)
 	ListProducts(ctx context.Context, _ *emptypb.Empty) (*proto.ListProductsResponse, error)
 
+	GetCategory(ctx context.Context, req *proto.GetCategoryRequest) (*proto.GetCategoryResponse, error)
 	ListCategories(ctx context.Context, _ *emptypb.Empty) (*proto.ListCategoriesResponse, error)
 }
 
