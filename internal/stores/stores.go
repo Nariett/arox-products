@@ -6,6 +6,7 @@ import (
 	"arox-products/internal/stores/products"
 )
 
+//go:generate mockgen -source=$GOFILE -destination=./mock/$GOFILE
 type Stores interface {
 	Images() images.Store
 	Products() products.Store

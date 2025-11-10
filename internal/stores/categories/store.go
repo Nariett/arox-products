@@ -6,6 +6,7 @@ import (
 	"github.com/jmoiron/sqlx"
 )
 
+//go:generate mockgen -source=$GOFILE -destination=./mock/$GOFILE
 type Store interface {
 	ListCategories(ctx context.Context) ([]*models.Category, error)
 	GetCategoryWithId(ctx context.Context, idCategory int64) (*models.Category, error)

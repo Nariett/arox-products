@@ -6,9 +6,10 @@ import (
 	"github.com/jmoiron/sqlx"
 )
 
+//go:generate mockgen -source=$GOFILE -destination=./mock/$GOFILE
 type Store interface {
 	ListProducts(ctx context.Context) ([]*models.ProductWithImage, error)
-	GetProductWithId(ctx context.Context, id int64) (*models.ProductWithImage, error)
+	GetProductWithId(ctx context.Context, id int64) (*models.Product, error)
 }
 
 type store struct {

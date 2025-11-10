@@ -6,6 +6,7 @@ import (
 	"github.com/jmoiron/sqlx"
 )
 
+//go:generate mockgen -source=$GOFILE -destination=./mock/$GOFILE
 type Store interface {
 	GetImagesWithId(ctx context.Context, idProduct int64) ([]*models.Image, error)
 }

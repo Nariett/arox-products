@@ -1,0 +1,50 @@
+-- INSERT INTO categories (name, slug)
+-- VALUES
+--     ('Футболки', 't-shirt'),
+--     ('Зип-худи', 'zip-hoodie'),
+--     ('Лонгсливы', 'longsleeve'),
+--     ('Шорты', 'shorts'),
+--     ('Джинсы', 'jeans'),
+--     ('Штаны', 'pants'),
+--     ('Брюки', 'trousers'),
+--     ('Худи','hoodie'),
+--     ('Куртка', 'jacket'),
+--     ('Нижнее белье', 'underwear'),
+--     ('Кроссовки', 'sneakers'),
+--     ('Ботинки', 'boots'),
+--     ('Балаклавы', 'balaclava');
+--
+-- INSERT INTO products (brand, name, category_id, price, description, sizes, is_active, created_at) VALUES
+--                                                                                                    ('VICESEASON', 'T-SHIRT «CRIMINAL BUSINESS»', 1, 85, 't-shirt', '{"sizes":[{"size":"S","count":10},{"size":"M","count":10},{"size":"L","count":0}]}', true, '2025-09-06 13:07:33+00'),
+--                                                                                                    ('VICESEASON', 'BALACLAVA «JONY»', 13, 100, 'balaclava', '{"sizes":[{"size":"ONE SIZE","count":6}]}', true, '2025-09-06 13:07:33+00'),
+--                                                                                                    ('VICESEASON', 'T-SHIRT «GERB»', 1, 85, 't-shirt', '{"sizes":[{"size":"S","count":0},{"size":"M","count":1},{"size":"L","count":4}]}', true, '2025-09-06 13:07:33+00'),
+--                                                                                                    ('VICESEASON', 'BALACLAVA «SNIPER»', 13, 90, 'balaclava', '{"sizes":[{"size":"ONE SIZE","count":3}]}', true, '2025-09-06 13:07:33+00'),
+--                                                                                                    ('BALENCIAGA', 'SNEAKER «NAVY»', 11, 1200, 'sneaker', '{"sizes":[{"size":"40","count":7},{"size":"41","count":8},{"size":"42","count":1}]}', true, '2025-09-06 13:07:33+00'),
+--                                                                                                    ('BALENCIAGA', 'SNEAKER «RUNNER»', 11, 1351, 'sneaker', '{"sizes":[{"size":"40","count":6},{"size":"41","count":4},{"size":"42","count":0}]}', true, '2025-09-06 13:07:33+00'),
+--                                                                                                    ('BALENCIAGA', 'SNEAKER «TRACK»', 11,1250, 'sneaker', '{"sizes":[{"size":"40","count":2},{"size":"41","count":3},{"size":"42","count":1}]}', true, '2025-09-06 13:07:33+00'),
+--                                                                                                    ('BALENCIAGA', 'SNEAKER «HIKE RUNNER»', 11, 1275, 'sneaker', '{"sizes":[{"size":"40","count":7},{"size":"41","count":8},{"size":"42","count":9}]}', true, '2025-09-06 13:07:33+00');
+--
+-- INSERT INTO images (id_product, url, is_main, is_active) VALUES
+-- (1, 'https://imglink.io/i/48d85097-28ec-4f36-9e98-1932bbc053d2.jpg', true, true),
+-- (1, 'https://imglink.io/i/ffa7072a-e65f-42fb-987e-e431e53644fa.jpg', false, true),
+--
+-- (2, 'https://imglink.io/i/8f5e5b3e-13de-4adf-ac96-016f2b19f553.jpg', true, true),
+-- (2, 'https://imglink.io/i/71d5b423-2dab-4c72-8d33-08b14693bb10.jpg', false, true),
+--
+-- (3, 'https://imglink.io/i/54aa33e7-7159-427b-90b8-d813f8c341cd.jpg', true, true),
+-- (3, 'https://imglink.io/i/8edf2102-7aa6-4ae9-9c62-b1ad6f86aa0c.jpg', false, true),
+--
+-- (4, 'https://imglink.io/i/981c2d10-1167-416c-81fb-37a8dfe0fe49.jpg', true, true),
+-- (4, 'https://imglink.io/i/d14ef4eb-c72b-4203-b8e6-e82983bb3485.jpg', false, true),
+--
+-- (5, 'https://imglink.io/i/bc9e92fd-389c-40a1-82a9-20eddf516912.jpg', true, true),
+-- (5, 'https://imglink.io/i/0f7ed4dc-fd3b-4192-99c2-d232a3554757.jpg', false, true),
+--
+-- (6, 'https://imglink.io/i/34f2df2c-9f47-4b2a-8f2e-665515a6a07e.jpg', true, true),
+-- (6, 'https://imglink.io/i/7ea34943-46d3-43c1-8a6b-f15da3ea7594.jpg', false, true),
+--
+-- (7, 'https://imglink.io/i/b1e05612-573a-47f7-88ef-b91d7a68ef3e.jpg', true, true),
+-- (7, 'https://imglink.io/i/224ea0e5-127d-47a2-8ccf-9ec4dc9110ab.jpg', false, true),
+--
+-- (8, 'https://imglink.io/i/9c027565-2201-4482-927f-eade323a3acf.jpg', true, true),
+-- (8, 'https://imglink.io/i/c7397ccd-4948-4d98-b07c-704fcf121651.jpg', false, true);

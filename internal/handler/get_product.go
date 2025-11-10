@@ -46,7 +46,7 @@ func (h *handler) GetProduct(ctx context.Context, req *proto.GetProductRequest) 
 
 	err = json.Unmarshal(product.Sizes, &sizes)
 	if err != nil {
-		return nil, err
+		return nil, status.Error(codes.Internal, err.Error())
 	}
 
 	var size []*proto.Size
