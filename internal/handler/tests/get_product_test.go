@@ -8,7 +8,7 @@ import (
 	mockproducts "arox-products/internal/stores/products/mock"
 	"context"
 	"database/sql"
-	"github.com/Nariett/arox-pkg/grpc/pb/products"
+	proto "github.com/Nariett/arox-pkg/grpc/pb/products"
 	"github.com/stretchr/testify/assert"
 	"go.uber.org/mock/gomock"
 	"google.golang.org/grpc/codes"
@@ -20,7 +20,7 @@ import (
 
 var (
 	timeNow       = time.Now()
-	productFromDB = &models.ProductWithImage{
+	productFromDB = &models.Product{
 		Id:          1,
 		Brand:       "Nike",
 		Name:        "T-Shirt HV9803-110",
@@ -49,7 +49,7 @@ var (
 		CreatedAt: timeNow,
 	}
 
-	errProductFromDB = &models.ProductWithImage{
+	errProductFromDB = &models.Product{
 		Id:          1,
 		Brand:       "Nike",
 		Name:        "T-Shirt HV9803-110",
@@ -95,15 +95,15 @@ var (
 		},
 	}
 
-	product = &products.GetProductResponse{
-		Product: &products.Product{
+	product = &proto.GetProductResponse{
+		Product: &proto.Product{
 			Id:          1,
 			Brand:       "Nike",
 			Name:        "T-Shirt HV9803-110",
 			CategoryId:  1,
 			Price:       145,
 			Description: "T-Shirt HV9803-110",
-			Sizes: []*products.Size{
+			Sizes: []*proto.Size{
 				{
 					Size:  "S",
 					Count: 11,
@@ -119,7 +119,7 @@ var (
 			},
 			IsActive:  true,
 			CreatedAt: timestamppb.New(timeNow),
-			Images: []*products.Image{
+			Images: []*proto.Image{
 				{
 					Id:        1,
 					IdProduct: 1,
@@ -155,7 +155,7 @@ func TestGetProduct(t *testing.T) {
 
 		h := handler.NewHandler(mockStore)
 
-		resp, err := h.GetProduct(ctx, &products.GetProductRequest{Id: 1})
+		resp, err := h.GetProduct(ctx, &proto.GetProductRequest{Id: 1})
 		if err != nil {
 			t.Fatalf("GetProduct(): %v", err)
 		}
@@ -177,7 +177,7 @@ func TestGetProduct(t *testing.T) {
 
 		h := handler.NewHandler(mockStore)
 
-		resp, err := h.GetProduct(ctx, &products.GetProductRequest{Id: 100})
+		resp, err := h.GetProduct(ctx, &proto.GetProductRequest{Id: 100})
 		assert.Equal(t, codes.NotFound, status.Code(err))
 		assert.Nil(t, resp)
 	})
@@ -191,7 +191,7 @@ func TestGetProduct(t *testing.T) {
 
 		h := handler.NewHandler(mockStore)
 
-		resp, err := h.GetProduct(ctx, &products.GetProductRequest{Id: 100})
+		resp, err := h.GetProduct(ctx, &proto.GetProductRequest{Id: 100})
 		assert.Equal(t, codes.NotFound, status.Code(err))
 		assert.Nil(t, resp)
 	})
@@ -205,7 +205,7 @@ func TestGetProduct(t *testing.T) {
 
 		h := handler.NewHandler(mockStore)
 
-		resp, err := h.GetProduct(ctx, &products.GetProductRequest{Id: 1})
+		resp, err := h.GetProduct(ctx, &proto.GetProductRequest{Id: 1})
 		assert.Equal(t, codes.Internal, status.Code(err))
 		assert.Nil(t, resp)
 	})

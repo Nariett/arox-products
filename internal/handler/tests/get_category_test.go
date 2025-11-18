@@ -8,7 +8,7 @@ import (
 	"context"
 	"database/sql"
 	"errors"
-	"github.com/Nariett/arox-pkg/grpc/pb/products"
+	proto "github.com/Nariett/arox-pkg/grpc/pb/products"
 	"github.com/stretchr/testify/assert"
 	"go.uber.org/mock/gomock"
 	"google.golang.org/grpc/codes"
@@ -36,7 +36,7 @@ func TestGetCategory(t *testing.T) {
 
 		h := handler.NewHandler(mockStore)
 
-		resp, err := h.GetCategory(ctx, &products.GetCategoryRequest{Id: 1})
+		resp, err := h.GetCategory(ctx, &proto.GetCategoryRequest{Id: 1})
 		if err != nil {
 			t.Fatalf("GetCategory(): %v", err)
 		}
@@ -52,7 +52,7 @@ func TestGetCategory(t *testing.T) {
 
 		h := handler.NewHandler(mockStore)
 
-		resp, err := h.GetCategory(ctx, &products.GetCategoryRequest{Id: 100})
+		resp, err := h.GetCategory(ctx, &proto.GetCategoryRequest{Id: 100})
 		assert.Equal(t, codes.NotFound, status.Code(err))
 		assert.Nil(t, resp)
 
@@ -64,7 +64,7 @@ func TestGetCategory(t *testing.T) {
 
 		h := handler.NewHandler(mockStore)
 
-		resp, err := h.GetCategory(ctx, &products.GetCategoryRequest{Id: 100})
+		resp, err := h.GetCategory(ctx, &proto.GetCategoryRequest{Id: 100})
 		assert.Equal(t, codes.Internal, status.Code(err))
 		assert.Nil(t, resp)
 	})

@@ -12,11 +12,8 @@ import (
 	"time"
 )
 
-func TestListProducts(t *testing.T) {
-	db := tests.CreateTestContainerWithMigrations(t)
-	store := NewStore(db)
-
-	categories := []models.Category{
+var (
+	categories = []models.Category{
 		{
 			Name: "Кроссовки",
 			Slug: "sneakers",
@@ -27,8 +24,7 @@ func TestListProducts(t *testing.T) {
 		},
 	}
 
-	sizesStr := `
-		{
+	sizesStr = `{
 	  "sizes": [
 		{
 		  "size": "S",
@@ -43,10 +39,9 @@ func TestListProducts(t *testing.T) {
 		  "count": 5
 		}
 	  ]
-	}
-	`
+	}`
 
-	products := []models.Product{
+	products = []models.Product{
 		{
 			Brand:       "Nike",
 			Name:        "base",
@@ -68,6 +63,11 @@ func TestListProducts(t *testing.T) {
 			CreatedAt:   time.Now().In(time.UTC),
 		},
 	}
+)
+
+func TestListProducts(t *testing.T) {
+	db := tests.CreateTestContainerWithMigrations(t)
+	store := NewStore(db)
 
 	for _, category := range categories {
 		createdCategory, err := tests.InsertCategory(db, category)

@@ -5,7 +5,6 @@ import (
 	"context"
 )
 
-// /подумать над запросом
 func (s *store) ListProducts(ctx context.Context) ([]*models.ProductWithImage, error) {
 	var products []*models.ProductWithImage
 

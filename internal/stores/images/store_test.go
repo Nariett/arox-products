@@ -11,18 +11,13 @@ import (
 	"time"
 )
 
-func TestGetImagesWithId(t *testing.T) {
-	ctx := context.Background()
-
-	db := tests.CreateTestContainerWithMigrations(t)
-	iStore := NewStore(db)
-
-	category := models.Category{
+var (
+	category = models.Category{
 		Name: "Футболки",
 		Slug: "t-shirts",
 	}
 
-	sizesStr := `
+	sizesStr = `
 		{
 	  "sizes": [
 		{
@@ -41,7 +36,7 @@ func TestGetImagesWithId(t *testing.T) {
 	}
 	`
 
-	product := models.Product{
+	product = models.Product{
 		Brand:       "Carhartt WIP",
 		Name:        "T-shirt Hudson Pocket",
 		CategoryId:  1,
@@ -52,7 +47,7 @@ func TestGetImagesWithId(t *testing.T) {
 		CreatedAt:   time.Now(),
 	}
 
-	images := []models.Image{
+	images = []models.Image{
 		{
 			IdProduct: 1,
 			Url:       "http://example.com/",
@@ -78,6 +73,13 @@ func TestGetImagesWithId(t *testing.T) {
 			IsActive:  false,
 		},
 	}
+)
+
+func TestGetImagesWithId(t *testing.T) {
+	ctx := context.Background()
+
+	db := tests.CreateTestContainerWithMigrations(t)
+	iStore := NewStore(db)
 
 	createdCategory, err := tests.InsertCategory(db, category)
 	require.NoError(t, err)
