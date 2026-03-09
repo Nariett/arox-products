@@ -3,6 +3,7 @@ package handler
 import (
 	"arox-products/internal/stores"
 	"context"
+
 	proto "github.com/Nariett/arox-pkg/grpc/pb/products"
 	"google.golang.org/protobuf/types/known/emptypb"
 )

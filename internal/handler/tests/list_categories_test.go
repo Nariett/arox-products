@@ -7,13 +7,15 @@ import (
 	mockstores "arox-products/internal/stores/mock"
 	"context"
 	"errors"
+
 	"github.com/stretchr/testify/assert"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 	"google.golang.org/protobuf/types/known/emptypb"
 
-	"go.uber.org/mock/gomock"
 	"testing"
+
+	"go.uber.org/mock/gomock"
 )
 
 var (

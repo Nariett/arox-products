@@ -8,12 +8,13 @@ import (
 	"context"
 	"database/sql"
 	"errors"
+	"testing"
+
 	proto "github.com/Nariett/arox-pkg/grpc/pb/products"
 	"github.com/stretchr/testify/assert"
 	"go.uber.org/mock/gomock"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
-	"testing"
 )
 
 var category = &models.Category{

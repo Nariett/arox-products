@@ -3,13 +3,14 @@ package tests
 import (
 	"arox-products/internal/models"
 	"context"
+	"testing"
+	"time"
+
 	pkg "github.com/Nariett/arox-pkg/db"
 	"github.com/jmoiron/sqlx"
 	"github.com/testcontainers/testcontainers-go"
 	"github.com/testcontainers/testcontainers-go/modules/postgres"
 	"github.com/testcontainers/testcontainers-go/wait"
-	"testing"
-	"time"
 )
 
 func CreateTestContainerWithMigrations(t *testing.T) *sqlx.DB {
